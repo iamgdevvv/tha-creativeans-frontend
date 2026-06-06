@@ -1,0 +1,15 @@
+stages:
+    - lint
+
+build-job:
+    stage: lint
+    image: node:latest
+    script:
+        - echo "Installing dependencies..."
+        - npm install
+        - echo "Install dependencies successful."
+        - echo "Linting code... This will take about 10 seconds."
+        - npm run lint
+        - echo "No lint issues found."
+        - npm run build
+        - echo "Build successful."
