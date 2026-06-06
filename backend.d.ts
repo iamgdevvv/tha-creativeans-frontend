@@ -10,7 +10,9 @@ type User = {
 	updatedAt: Date
 }
 
-type UserMe = Pick<User, 'name' | 'email' | 'role'>
+type UserMe = Pick<User, 'name' | 'email' | 'role'> & {
+	hasAuth: boolean
+}
 
 type Asset = {
 	path: 'products'

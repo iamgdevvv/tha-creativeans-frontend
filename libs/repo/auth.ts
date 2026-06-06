@@ -1,7 +1,11 @@
 'use server'
 
 import type { AuthLogin, AuthRegister } from '@libs/schema/auth'
-import { mutateBackend } from '@libs/server-functions/backend-api'
+import {
+	fetchBackend,
+	mutateBackend,
+	type ResponseBackendData,
+} from '@libs/server-functions/backend-api'
 import { storeTokenAuth } from '@libs/server-functions/cookie-auth'
 
 export async function authLogin(payload: AuthLogin) {
@@ -26,4 +30,22 @@ export async function authLogin(payload: AuthLogin) {
 
 export async function authRegister(payload: AuthRegister) {
 	return await mutateBackend<User, AuthRegister>('/api/auth/register', payload)
+}
+
+export async function authOauthGoogle(params: string) {
+	const result = await fetchBackend<
+		ResponseBackendData<User> & {
+			token: string
+		}
+	>('/api/auth/oauth/google?' + params)
+
+	if (result.code === 'error') {
+		return result
+	}
+
+	const { token, ...response } = result
+
+	await storeTokenAuth(token)
+
+	return response
 }

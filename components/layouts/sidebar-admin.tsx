@@ -96,7 +96,7 @@ export default function SidebarAdmin({
 			</Button>
 			<Button
 				component={Link}
-				href="/admin/logout"
+				href="/logout"
 				variant="subtle"
 				color="red"
 				radius="md"

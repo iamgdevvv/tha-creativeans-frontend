@@ -1,7 +1,10 @@
 import { Badge, Group, Title } from '@mantine/core'
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 
 import FormUpdateUserProfilePassword from '@components/layouts/form-profile-user-password'
+import FormUserMePassword from '@components/layouts/form-userme-password'
+import { userMe } from '@libs/repo/users'
 
 export const metadata: Metadata = {
 	title: 'Change Password',
@@ -10,20 +13,30 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic'
 
 export default async function UserProfileUpdatePassword() {
+	const resultUser = await userMe()
+
+	if (resultUser.code === 'error') {
+		redirect('/logout')
+	}
+
 	return (
 		<>
 			<Group>
-				<Title fz="xl">Change Password</Title>
+				<Title fz="xl">Profile Password</Title>
 				<Badge
 					variant="light"
 					p="sm"
 					tt="uppercase"
 					ml="auto"
 				>
-					Update
+					{resultUser.data.hasAuth ? 'Update' : 'New'}
 				</Badge>
 			</Group>
-			<FormUpdateUserProfilePassword mt="xl" />
+			{resultUser.data.hasAuth ? (
+				<FormUpdateUserProfilePassword mt="xl" />
+			) : (
+				<FormUserMePassword mt="xl" />
+			)}
 		</>
 	)
 }

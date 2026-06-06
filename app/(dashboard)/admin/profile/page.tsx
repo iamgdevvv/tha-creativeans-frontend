@@ -16,7 +16,7 @@ export default async function UserProfile() {
 	const resultUser = await userMe()
 
 	if (resultUser.code === 'error') {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return (
@@ -55,7 +55,7 @@ export default async function UserProfile() {
 					variant="light"
 					radius="md"
 				>
-					Change Password
+					{resultUser.data.hasAuth ? 'Change Password' : 'Set Password'}
 				</Button>
 			</Group>
 		</>

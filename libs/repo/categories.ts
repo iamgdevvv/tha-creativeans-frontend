@@ -27,7 +27,7 @@ export async function queryCategory(categoryId: Category['id'], params?: ParamsC
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -45,7 +45,7 @@ export async function createCategory(payload: CreateCategory) {
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -68,7 +68,7 @@ export async function updateCategory(categoryId: Category['id'], payload: Create
 	)
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -87,7 +87,7 @@ export async function deleteCategory(categoryId: Category['id']) {
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result

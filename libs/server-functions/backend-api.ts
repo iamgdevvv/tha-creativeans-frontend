@@ -26,7 +26,7 @@ export type ResponseBackendError = {
 	statusCode: number
 }
 
-async function fetchBackend<T>(
+export async function fetchBackend<T>(
 	endpoint: string,
 	options?: {
 		method?: RequestInit['method']

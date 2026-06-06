@@ -32,7 +32,7 @@ export async function queryProduct<T = Product>(productId: Product['id'], params
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -50,7 +50,7 @@ export async function createProduct(payload: CreateProduct) {
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -73,7 +73,7 @@ export async function updateProduct(productId: Product['id'], payload: UpdatePro
 	)
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -92,7 +92,7 @@ export async function deleteProduct(productId: Product['id']) {
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result

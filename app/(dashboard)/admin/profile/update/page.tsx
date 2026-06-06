@@ -15,7 +15,7 @@ export default async function UserProfileUpdate() {
 	const resultUser = await userMe()
 
 	if (resultUser.code === 'error') {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return (

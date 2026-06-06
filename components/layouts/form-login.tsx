@@ -39,7 +39,9 @@ export default function FormLogin(props: BoxProps) {
 							? 'Password is incorrect'
 							: result.statusCode === 403
 								? 'Your account is disabled'
-								: 'Something went wrong',
+								: result.statusCode === 501
+									? 'Your account is not verified, Try login with oauth'
+									: 'Something went wrong',
 				)
 				return
 			}

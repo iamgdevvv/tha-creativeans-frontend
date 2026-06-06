@@ -39,7 +39,7 @@ export async function uploadAsset(payload: UploadAsset) {
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -58,7 +58,7 @@ export async function deleteAsset(params: Pick<Asset, 'filename' | 'path'>) {
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result

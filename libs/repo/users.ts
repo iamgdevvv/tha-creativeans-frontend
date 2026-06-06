@@ -36,6 +36,28 @@ export async function userMe(): Promise<ResponseBackendData<UserMe> | ResponseBa
 	})
 }
 
+export async function userMePassword(payload: UpdateUserPassword) {
+	const authToken = await retrieveTokenAuth()
+
+	if (!authToken) {
+		redirect('/login')
+	}
+
+	const result = await mutateBackend<unknown, UpdateUserPassword>(
+		'/api/users/me/password',
+		payload,
+		{
+			authorization: `Bearer ${authToken}`,
+		},
+	)
+
+	if ([401, 403].includes(result.statusCode)) {
+		redirect('/logout')
+	}
+
+	return result
+}
+
 export async function queryUsers<T = User>(params?: ParamsUsers) {
 	const authToken = await retrieveTokenAuth()
 
@@ -49,7 +71,7 @@ export async function queryUsers<T = User>(params?: ParamsUsers) {
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -68,7 +90,7 @@ export async function queryUser<T = User>(userId: User['id'], params?: ParamsUse
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -86,7 +108,7 @@ export async function createUser(payload: CreateUser) {
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -105,7 +127,7 @@ export async function updateUser(userId: User['id'], payload: UpdateUser) {
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -127,7 +149,7 @@ export async function updateUserPassword(userId: User['id'], payload: UpdateUser
 	)
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -146,7 +168,7 @@ export async function updateUserProfile(payload: UpdateUserProfile) {
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -169,7 +191,7 @@ export async function updateUserProfilePassword(
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
@@ -188,7 +210,7 @@ export async function deleteUser(userId: User['id']) {
 	})
 
 	if ([401, 403].includes(result.statusCode)) {
-		redirect('/admin/logout')
+		redirect('/logout')
 	}
 
 	return result
