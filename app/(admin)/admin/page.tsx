@@ -11,7 +11,7 @@ export default async function Admin() {
 	return (
 		<>
 			<Group>
-				<Title fz="xl">Dashboard</Title>
+				<Title fz="xl">Admin</Title>
 				<Text
 					display="block"
 					component="span"

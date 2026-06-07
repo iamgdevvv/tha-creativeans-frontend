@@ -17,7 +17,7 @@ import {
 	type ResponseBackendData,
 	type ResponseBackendError,
 } from '@libs/server-functions/backend-api'
-import { retrieveTokenAuth } from '@libs/server-functions/cookie-auth'
+import { retrieveTokenAuth } from '@libs/server-functions/cookies'
 import { objectToParams } from '@libs/utils'
 
 export async function userMe(): Promise<ResponseBackendData<UserMe> | ResponseBackendError> {

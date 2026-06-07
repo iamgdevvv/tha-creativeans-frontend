@@ -41,7 +41,7 @@ export default async function Products({ searchParams }: AppProps) {
 	const authUser = await userMe()
 
 	if (authUser.code === 'error') {
-		redirect('/login')
+		redirect('/login?redirectUrl=/admin/products')
 	}
 
 	const { q, page: pageParam } = await searchParams
@@ -86,6 +86,7 @@ export default async function Products({ searchParams }: AppProps) {
 			>
 				<Input
 					key={`search-${q}-${page}`}
+					type="search"
 					maw={480}
 					visibleFrom="sm"
 					placeholder="Search"

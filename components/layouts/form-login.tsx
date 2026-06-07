@@ -17,7 +17,12 @@ import { useScrollFormError } from '@libs/hooks'
 import { authLogin } from '@libs/repo/auth'
 import { AuthLoginSchema, type AuthLogin } from '@libs/schema/auth'
 
-export default function FormLogin(props: BoxProps) {
+export default function FormLogin({
+	redirectUrl,
+	...props
+}: BoxProps & {
+	redirectUrl?: string
+}) {
 	const [errorAuthLogin, setErrorAuthLogin] = useState<string | null>(null)
 	const [isLoadingSubmit, startActionSubmit] = useTransition()
 
@@ -25,34 +30,39 @@ export default function FormLogin(props: BoxProps) {
 		validate: schemaResolver(AuthLoginSchema, { sync: true }),
 	})
 
-	const handlerSubmit = useCallback(async (payload: AuthLogin) => {
-		setErrorAuthLogin(null)
+	const handlerSubmit = useCallback(
+		async (payload: AuthLogin) => {
+			setErrorAuthLogin(null)
 
-		startActionSubmit(async () => {
-			const result = await authLogin(payload)
+			startActionSubmit(async () => {
+				const result = await authLogin(payload)
 
-			if (result.code === 'error') {
-				setErrorAuthLogin(
-					result.statusCode === 404
-						? 'User not found'
-						: result.statusCode === 401
-							? 'Password is incorrect'
-							: result.statusCode === 403
-								? 'Your account is disabled'
-								: result.statusCode === 501
-									? 'Your account is not verified, Try login with oauth'
-									: 'Something went wrong',
-				)
-				return
-			}
+				if (result.code === 'error') {
+					setErrorAuthLogin(
+						result.statusCode === 404
+							? 'User not found'
+							: result.statusCode === 401
+								? 'Password is incorrect'
+								: result.statusCode === 403
+									? 'Your account is disabled'
+									: result.statusCode === 501
+										? 'Your account is not verified, Try login with oauth'
+										: 'Something went wrong',
+					)
+					return
+				}
 
-			if (['ADMIN', 'STAFF'].includes(result.data.role)) {
-				redirect('/admin')
-			} else {
-				redirect('/dashboard')
-			}
-		})
-	}, [])
+				if (redirectUrl) {
+					redirect(redirectUrl)
+				} else if (['ADMIN', 'STAFF'].includes(result.data.role)) {
+					redirect('/admin')
+				} else {
+					redirect('/dashboard')
+				}
+			})
+		},
+		[redirectUrl],
+	)
 
 	const scrollFormError = useScrollFormError()
 

@@ -29,7 +29,7 @@ export default function SidebarAdmin({
 				radius="md"
 				justify="flex-start"
 			>
-				Dashboard
+				Admin
 			</Button>
 			<Button
 				component={Link}
@@ -84,11 +84,10 @@ export default function SidebarAdmin({
 			) : null}
 			<Button
 				component={Link}
-				href="/admin/profile"
+				variant="subtle"
+				href="/dashboard/profile"
 				color="primary.2"
-				variant={currentPathname(pathname, '/admin/profile') ? 'light' : 'subtle'}
-				bg={currentPathname(pathname, '/admin/profile') ? 'primary.0' : undefined}
-				c={currentPathname(pathname, '/admin/profile') ? 'primary' : 'black'}
+				c="black"
 				radius="md"
 				justify="flex-start"
 			>
@@ -96,7 +95,7 @@ export default function SidebarAdmin({
 			</Button>
 			<Button
 				component={Link}
-				href="/logout"
+				href="/logout?redirectUrl=/"
 				variant="subtle"
 				color="red"
 				radius="md"

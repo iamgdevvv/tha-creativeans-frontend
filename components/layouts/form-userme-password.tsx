@@ -36,7 +36,7 @@ export default function FormUserMePassword(props: BoxProps) {
 				return
 			}
 
-			redirect('/admin/profile/')
+			redirect('/dashboard/profile')
 		})
 	}, [])
 

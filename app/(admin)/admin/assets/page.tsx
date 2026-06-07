@@ -67,6 +67,7 @@ export default async function Assets({ searchParams }: AppProps) {
 			>
 				<Input
 					key={`search-${q}-${page}`}
+					type="search"
 					maw={480}
 					visibleFrom="sm"
 					placeholder="Search"

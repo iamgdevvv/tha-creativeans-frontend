@@ -36,14 +36,12 @@ export default function FormUpdateUserProfilePassword(props: BoxProps) {
 				new_password: payload.new_password,
 			})
 
-			console.log('result', result)
-
 			if (result.code === 'error') {
 				setErrorUpdateUserProfilePassword('Failed to update password')
 				return
 			}
 
-			redirect('/admin/profile')
+			redirect('/dashboard/profile')
 		})
 	}, [])
 

@@ -46,7 +46,7 @@ export default function FormUpdateUserProfile({ data, disabled, ...props }: Prop
 				return
 			}
 
-			redirect('/admin/profile')
+			redirect('/dashboard/profile')
 		})
 	}, [])
 

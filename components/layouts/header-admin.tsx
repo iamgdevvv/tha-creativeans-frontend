@@ -87,7 +87,7 @@ export default function HeaderAdmin({ data, containerSize, className, ...props }
 							<MenuDivider />
 							<MenuItem
 								component={Link}
-								href="/logout"
+								href="/logout?redirectUrl=/"
 								color="red"
 								leftSection={<LuLogOut size={14} />}
 							>

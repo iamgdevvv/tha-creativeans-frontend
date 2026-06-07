@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-import { storeTokenAuth } from '@libs/server-functions/cookie-auth'
+import {
+	removeRedirectOauthLogin,
+	retrieveRedirectOauthLogin,
+	storeTokenAuth,
+} from '@libs/server-functions/cookies'
 
 export const dynamic = 'force-dynamic'
 
@@ -14,6 +18,13 @@ export async function GET(request: NextRequest) {
 	}
 
 	await storeTokenAuth(token)
+
+	const redirectUrl = await retrieveRedirectOauthLogin()
+
+	if (redirectUrl) {
+		await removeRedirectOauthLogin()
+		return NextResponse.redirect(new URL(redirectUrl, request.url), { status: 307 })
+	}
 
 	if (role && ['ADMIN', 'STAFF'].includes(role)) {
 		return NextResponse.redirect(new URL('/admin', request.url), { status: 307 })

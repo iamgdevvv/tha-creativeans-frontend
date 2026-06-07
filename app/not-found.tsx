@@ -5,19 +5,21 @@ import Link from '@components/atoms/link'
 import Footer from '@components/layouts/footer'
 import Header from '@components/layouts/header'
 import Providers from '@components/providers/providers'
+import { userMe } from '@libs/repo/users'
 
-export const dynamic = 'force-static'
-export const revalidate = 2592000
+export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
 	title: '404 Creativeans',
 }
 
-export default function Home() {
+export default async function NotFound() {
+	const authUser = await userMe()
+
 	return (
 		<Providers>
 			<div className="site">
-				<Header />
+				<Header data={authUser.code === 'success' ? authUser.data : undefined} />
 				<main className="site-main">
 					<Container
 						size="xs"

@@ -6,10 +6,11 @@
 	"scripts": {
 		"mantine::generate": "npx tailwind-preset-mantine ./libs/modules/theme.ts -o ./styles/mantine.css",
 		"dev": "next dev",
-		"build": "tsc --noEmit && npm run lint && npm run format && next build",
+		"build": "tsc --noEmit && npm run lint && npm run format:check && next build",
 		"start": "next start",
 		"lint": "eslint",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"format:check": "prettier . --check"
 	},
 	"dependencies": {
 		"@mantine/carousel": "^9.3.0",

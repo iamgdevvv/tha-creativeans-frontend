@@ -153,18 +153,6 @@ export default function FormUpdateProduct({ data, disabled, ...props }: Props) {
 					})
 				}
 
-				console.log({
-					...payload,
-					categories: {
-						add: categoryAddIds,
-						remove: categoryRemoveIds,
-					},
-					thumbnails: {
-						add: thumbnailAddIds,
-						remove: thumbnailRemoveIds,
-					},
-				})
-
 				const result = await updateProduct(data.id, {
 					...payload,
 					categories: {

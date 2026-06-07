@@ -14,7 +14,5 @@ export async function GET(request: NextRequest) {
 	oauthCallbackUrl.searchParams.set('redirectUrl', redirectUrl)
 	oauthCallbackUrl.searchParams.set('errorRedirectUrl', errorRedirectUrl)
 
-	console.log('oauthCallbackUrl', oauthCallbackUrl)
-
 	return NextResponse.redirect(oauthCallbackUrl, { status: 307 })
 }

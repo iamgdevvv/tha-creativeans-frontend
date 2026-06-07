@@ -8,7 +8,7 @@ import type {
 	UpdateProduct,
 } from '@libs/schema/product'
 import { mutateBackend, queriesBackend, queryBackend } from '@libs/server-functions/backend-api'
-import { retrieveTokenAuth } from '@libs/server-functions/cookie-auth'
+import { retrieveTokenAuth } from '@libs/server-functions/cookies'
 import { objectToParams } from '@libs/utils'
 
 export async function queryProducts<T = Product>(params?: ParamsProducts) {

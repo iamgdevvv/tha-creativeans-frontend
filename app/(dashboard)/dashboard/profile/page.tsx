@@ -44,14 +44,14 @@ export default async function UserProfile() {
 			>
 				<Button
 					component={Link}
-					href={'/admin/profile/update'}
+					href={'/dashboard/profile/update'}
 					radius="md"
 				>
 					Update Data
 				</Button>
 				<Button
 					component={Link}
-					href={'/admin/profile/password'}
+					href={'/dashboard/profile/password'}
 					variant="light"
 					radius="md"
 				>

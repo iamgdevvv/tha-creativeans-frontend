@@ -6,7 +6,7 @@ import {
 	mutateBackend,
 	type ResponseBackendData,
 } from '@libs/server-functions/backend-api'
-import { storeTokenAuth } from '@libs/server-functions/cookie-auth'
+import { storeTokenAuth } from '@libs/server-functions/cookies'
 
 export async function authLogin(payload: AuthLogin) {
 	const result = await mutateBackend<

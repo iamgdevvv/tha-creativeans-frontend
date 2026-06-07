@@ -24,3 +24,27 @@ export async function retrieveTokenAuth() {
 
 	return cookieStore.get(process.env.COOKIE_SESSION_AUTH)?.value
 }
+
+export async function storeRedirectOauthLogin(redirectUrl: string) {
+	const cookieStore = await cookies()
+
+	cookieStore.set('redirect_auth', redirectUrl, {
+		httpOnly: true,
+		secure: process.env.NODE_ENV === 'production',
+		sameSite: 'lax',
+		path: '/',
+		maxAge: 60 * 60 * 24 * 7,
+	})
+}
+
+export async function removeRedirectOauthLogin() {
+	const cookieStore = await cookies()
+
+	cookieStore.delete('redirect_auth')
+}
+
+export async function retrieveRedirectOauthLogin() {
+	const cookieStore = await cookies()
+
+	return cookieStore.get('redirect_auth')?.value
+}

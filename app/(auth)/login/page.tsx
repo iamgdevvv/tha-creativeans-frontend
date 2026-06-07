@@ -11,7 +11,13 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic'
 
-export default function Login() {
+type PageProps = {
+	searchParams: Promise<{ redirectUrl?: string }>
+}
+
+export default async function Login({ searchParams }: PageProps) {
+	const { redirectUrl } = await searchParams
+
 	return (
 		<Container
 			size="xs"
@@ -46,11 +52,11 @@ export default function Login() {
 				mt="xl"
 				radius="lg"
 			>
-				<FormLogin />
+				<FormLogin redirectUrl={redirectUrl} />
 				<Divider my="xl" />
 				<Button
 					component={Link}
-					href="/login-google"
+					href={`/login-google?redirectUrl=${redirectUrl}`}
 					variant="light"
 					fullWidth
 					radius="md"

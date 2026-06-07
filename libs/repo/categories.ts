@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 
 import type { CreateCategory, ParamsCategories, ParamsCategory } from '@libs/schema/category'
 import { mutateBackend, queriesBackend, queryBackend } from '@libs/server-functions/backend-api'
-import { retrieveTokenAuth } from '@libs/server-functions/cookie-auth'
+import { retrieveTokenAuth } from '@libs/server-functions/cookies'
 import { objectToParams } from '@libs/utils'
 
 export async function queryCategories<T = Category>(params?: ParamsCategories) {

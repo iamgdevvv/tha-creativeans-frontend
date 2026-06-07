@@ -29,7 +29,7 @@ export default function Register() {
 				<Text>
 					Already have an account?{' '}
 					<Link
-						href="/admin/login"
+						href="/login"
 						underline="always"
 					>
 						Login
