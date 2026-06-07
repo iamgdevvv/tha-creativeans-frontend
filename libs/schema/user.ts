@@ -21,6 +21,11 @@ export const ParamsUserSchema = z.object({
 export const ParamsUsersSchema = z.object({
 	...ParamsUserSchema.shape,
 	name: z.string().optional(),
+	email: z.string().optional(),
+	role: UserRoleSchema.optional(),
+	isActive: z.boolean().optional(),
+	createdAt: z.coerce.date().optional(),
+	updatedAt: z.coerce.date().optional(),
 	desc: z
 		.enum([
 			'name',

@@ -18,11 +18,13 @@ import {
 	Title,
 } from '@mantine/core'
 import type { Metadata } from 'next'
+import { redirect } from 'next/navigation'
 import { LuCheck, LuSearch, LuX } from 'react-icons/lu'
 
 import ButtonDeleteProduct from '@components/atoms/button-delete-product'
 import Link from '@components/atoms/link'
 import { queryProducts } from '@libs/repo/products'
+import { userMe } from '@libs/repo/users'
 import { displayPrice, displayRating } from '@libs/utils'
 
 export const metadata: Metadata = {
@@ -36,6 +38,12 @@ type AppProps = {
 }
 
 export default async function Products({ searchParams }: AppProps) {
+	const authUser = await userMe()
+
+	if (authUser.code === 'error') {
+		redirect('/login')
+	}
+
 	const { q, page: pageParam } = await searchParams
 
 	const limit = 12
@@ -50,6 +58,7 @@ export default async function Products({ searchParams }: AppProps) {
 		q,
 		limit,
 		skip,
+		userEmail: authUser.data.role !== 'ADMIN' ? authUser.data.email : undefined,
 	})
 
 	return (

@@ -49,9 +49,8 @@ export default function Register() {
 				<FormRegister />
 				<Divider my="xl" />
 				<Button
-					component="a"
-					href={process.env.NEXT_PUBLIC_API_URL + '/api/auth/login/google'}
-					target="_blank"
+					component={Link}
+					href="/login-google"
 					variant="light"
 					fullWidth
 					radius="md"

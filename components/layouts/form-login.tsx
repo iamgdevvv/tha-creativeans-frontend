@@ -46,7 +46,11 @@ export default function FormLogin(props: BoxProps) {
 				return
 			}
 
-			redirect('/admin')
+			if (['ADMIN', 'STAFF'].includes(result.data.role)) {
+				redirect('/admin')
+			} else {
+				redirect('/dashboard')
+			}
 		})
 	}, [])
 

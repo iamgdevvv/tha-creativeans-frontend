@@ -22,6 +22,15 @@ export const ParamsProductSchema = z.object({
 export const ParamsProductsSchema = z.object({
 	...ParamsProductSchema.shape,
 	name: z.string().optional(),
+	slug: z.string().optional(),
+	price: z.number().optional(),
+	description: z.string().optional(),
+	rating: z.number().min(0).max(5).optional(),
+	inStock: z.boolean().optional(),
+	userId: z.string().optional(),
+	userEmail: z.email().optional(),
+	createdAt: z.coerce.date().optional(),
+	updatedAt: z.coerce.date().optional(),
 	desc: z
 		.enum([
 			'name',

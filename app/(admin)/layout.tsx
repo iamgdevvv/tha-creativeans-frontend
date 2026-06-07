@@ -54,8 +54,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 		redirect('/login')
 	}
 
-	if (authUser.data.role !== 'CUSTOMER') {
-		redirect('/admin/profile')
+	if (['ADMIN', 'STAFF'].includes(authUser.data.role) === false) {
+		redirect('/dashboard')
 	}
 
 	return (

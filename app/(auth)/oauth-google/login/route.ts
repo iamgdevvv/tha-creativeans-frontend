@@ -7,6 +7,7 @@ export const dynamic = 'force-dynamic'
 export async function GET(request: NextRequest) {
 	const url = new URL(request.url)
 	const token = url.searchParams.get('token')
+	const role = url.searchParams.get('role') as UserRole | null
 
 	if (!token) {
 		return NextResponse.redirect(new URL('/login', request.url), { status: 307 })
@@ -14,5 +15,9 @@ export async function GET(request: NextRequest) {
 
 	await storeTokenAuth(token)
 
-	return NextResponse.redirect(new URL('/admin', request.url), { status: 307 })
+	if (role && ['ADMIN', 'STAFF'].includes(role)) {
+		return NextResponse.redirect(new URL('/admin', request.url), { status: 307 })
+	}
+
+	return NextResponse.redirect(new URL('/dashboard', request.url), { status: 307 })
 }

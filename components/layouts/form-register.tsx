@@ -10,55 +10,45 @@ import {
 	type BoxProps,
 } from '@mantine/core'
 import { schemaResolver, useForm } from '@mantine/form'
-import { useSetState } from '@mantine/hooks'
-import { useCallback, useTransition } from 'react'
+import { redirect } from 'next/navigation'
+import { useCallback, useState, useTransition } from 'react'
 
 import { useScrollFormError } from '@libs/hooks'
 import { authRegister } from '@libs/repo/auth'
 import { AuthRegisterSchema, type AuthRegister } from '@libs/schema/auth'
 
 export default function FormRegister(props: BoxProps) {
-	const [resultAuthRegister, setResultAuthRegister] = useSetState<{
-		data: User | null
-		error: string | null
-	}>({
-		data: null,
-		error: null,
-	})
+	const [errorAuthRegister, setErrorAuthRegister] = useState<string | null>(null)
 	const [isLoadingSubmit, startActionSubmit] = useTransition()
 
 	const form = useForm<AuthRegister>({
 		validate: schemaResolver(AuthRegisterSchema, { sync: true }),
 	})
 
-	const handlerSubmit = useCallback(
-		async (payload: AuthRegister) => {
-			setResultAuthRegister({ data: null, error: null })
+	const handlerSubmit = useCallback(async (payload: AuthRegister) => {
+		setErrorAuthRegister(null)
 
-			startActionSubmit(async () => {
-				const result = await authRegister(payload)
+		startActionSubmit(async () => {
+			const result = await authRegister(payload)
 
-				if (result.code === 'error') {
-					setResultAuthRegister({
-						error:
-							result.statusCode === 404
-								? 'User not found'
-								: result.statusCode === 401
-									? 'Password is incorrect'
-									: result.statusCode === 403
-										? 'Your account is disabled'
-										: 'Something went wrong',
-					})
-					return
-				}
+			if (result.code === 'error') {
+				setErrorAuthRegister(
+					result.statusCode === 404
+						? 'User not found'
+						: result.statusCode === 401
+							? 'Password is incorrect'
+							: result.statusCode === 403
+								? 'Your account is disabled'
+								: result.statusCode === 501
+									? 'Your account is not verified, Try login with oauth'
+									: 'Something went wrong',
+				)
+				return
+			}
 
-				setResultAuthRegister({
-					data: result.data,
-				})
-			})
-		},
-		[setResultAuthRegister],
-	)
+			redirect('/login')
+		})
+	}, [])
 
 	const scrollFormError = useScrollFormError()
 
@@ -68,7 +58,7 @@ export default function FormRegister(props: BoxProps) {
 			component="form"
 			onSubmit={form.onSubmit(handlerSubmit, () => scrollFormError())}
 		>
-			<Transition mounted={!!resultAuthRegister.error}>
+			<Transition mounted={!!errorAuthRegister}>
 				{(styleTransition) => (
 					<Alert
 						variant="light"
@@ -77,7 +67,7 @@ export default function FormRegister(props: BoxProps) {
 						p="xs"
 						style={styleTransition}
 					>
-						<Text fz="sm">{resultAuthRegister.error}</Text>
+						<Text fz="sm">{errorAuthRegister}</Text>
 					</Alert>
 				)}
 			</Transition>

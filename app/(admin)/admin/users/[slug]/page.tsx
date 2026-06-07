@@ -96,7 +96,15 @@ export default async function DetailUser({ params }: { params: Promise<{ slug: s
 					href={`/admin/users/${resultUser.data.id}/update`}
 					radius="md"
 				>
-					Update Data
+					Update
+				</Button>
+				<Button
+					component={Link}
+					href={`/admin/users/${resultUser.data.id}/password`}
+					variant="light"
+					radius="md"
+				>
+					Change Password
 				</Button>
 				<ButtonDeleteUser
 					userId={resultUser.data.id}
@@ -104,7 +112,7 @@ export default async function DetailUser({ params }: { params: Promise<{ slug: s
 					color="red"
 					radius="md"
 				>
-					Delete Data
+					Delete
 				</ButtonDeleteUser>
 			</Group>
 		</>
