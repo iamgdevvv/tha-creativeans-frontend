@@ -41,7 +41,7 @@ export default async function Products({ searchParams }: AppProps) {
 	const authUser = await userMe()
 
 	if (authUser.code === 'error') {
-		redirect('/login?redirectUrl=/admin/products')
+		redirect('/auth/login?redirectUrl=/admin/products')
 	}
 
 	const { q, page: pageParam } = await searchParams
@@ -58,7 +58,6 @@ export default async function Products({ searchParams }: AppProps) {
 		q,
 		limit,
 		skip,
-		userEmail: authUser.data.role !== 'ADMIN' ? authUser.data.email : undefined,
 	})
 
 	return (

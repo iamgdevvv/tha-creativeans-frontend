@@ -28,9 +28,52 @@ export const ParamsProductsSchema = z.object({
 	rating: z.number().min(0).max(5).optional(),
 	inStock: z.boolean().optional(),
 	userId: z.string().optional(),
-	userEmail: z.email().optional(),
 	createdAt: z.coerce.date().optional(),
 	updatedAt: z.coerce.date().optional(),
+	categories: z.string().array().optional(),
+	desc: z
+		.enum([
+			'name',
+			'slug',
+			'price',
+			'description',
+			'rating',
+			'inStock',
+			'userId',
+			'createdAt',
+			'updatedAt',
+		])
+		.array()
+		.optional(),
+	asc: z
+		.enum([
+			'name',
+			'slug',
+			'price',
+			'description',
+			'rating',
+			'inStock',
+			'userId',
+			'createdAt',
+			'updatedAt',
+		])
+		.array()
+		.optional(),
+	limit: z.number().optional(),
+	skip: z.number().optional(),
+	q: z.string().optional(),
+})
+
+export const ParamsProductsPublicSchema = z.object({
+	name: z.string().optional(),
+	slug: z.string().optional(),
+	price: z.number().optional(),
+	description: z.string().optional(),
+	rating: z.number().min(0).max(5).optional(),
+	inStock: z.boolean().optional(),
+	createdAt: z.coerce.date().optional(),
+	updatedAt: z.coerce.date().optional(),
+	categories: z.string().array().optional(),
 	desc: z
 		.enum([
 			'name',
@@ -114,6 +157,7 @@ export const UpdateProductSchema = z
 	}
 >
 
+export type ParamsProductsPublic = z.infer<typeof ParamsProductsPublicSchema>
 export type ParamsProducts = z.infer<typeof ParamsProductsSchema>
 export type ParamsProduct = z.infer<typeof ParamsProductSchema>
 export type CreateProduct = z.infer<typeof CreateProductSchema>

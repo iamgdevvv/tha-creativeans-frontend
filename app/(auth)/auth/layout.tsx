@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation'
 
 import Footer from '@components/layouts/footer'
-import Providers from '@components/providers/providers'
 import { userMe } from '@libs/repo/users'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -16,11 +15,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 	}
 
 	return (
-		<Providers>
-			<div className="site">
-				<main className="site-main">{children}</main>
-				<Footer />
-			</div>
-		</Providers>
+		<div className="site">
+			<main className="site-main">{children}</main>
+			<Footer />
+		</div>
 	)
 }

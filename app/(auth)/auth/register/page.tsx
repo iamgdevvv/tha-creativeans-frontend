@@ -29,7 +29,7 @@ export default function Register() {
 				<Text>
 					Already have an account?{' '}
 					<Link
-						href="/login"
+						href="/auth/login"
 						underline="always"
 					>
 						Login
@@ -50,7 +50,7 @@ export default function Register() {
 				<Divider my="xl" />
 				<Button
 					component={Link}
-					href="/login-google"
+					href="/auth/login/google"
 					variant="light"
 					fullWidth
 					radius="md"

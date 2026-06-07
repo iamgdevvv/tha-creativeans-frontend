@@ -11,9 +11,7 @@ export const dynamic = 'force-dynamic'
 
 export default async function UpdateUserPassword({
 	params,
-}: {
-	params: Promise<{ slug: string }>
-}) {
+}: PageProps<'/admin/users/[slug]/password'>) {
 	const { slug } = await params
 
 	return (

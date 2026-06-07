@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic'
 
-export default async function UpdateProduct({ params }: { params: Promise<{ slug: string }> }) {
+export default async function UpdateProduct({
+	params,
+}: PageProps<'/admin/products/[slug]/update'>) {
 	const { slug } = await params
 	const resultProduct = await queryProduct<DetailProduct>(slug, {
 		include: ['productThumbnails', 'productCategories'],

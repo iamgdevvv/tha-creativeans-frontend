@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic'
 
-export default async function DetailProduct({ params }: { params: Promise<{ slug: string }> }) {
+export default async function DetailProduct({ params }: PageProps<'/admin/products/[slug]'>) {
 	const { slug } = await params
 	const resultProduct = await queryProduct<DetailProduct>(slug, {
 		include: ['productThumbnails', 'productCategories'],

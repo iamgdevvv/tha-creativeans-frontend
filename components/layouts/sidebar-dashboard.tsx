@@ -51,7 +51,7 @@ export default function SidebarDashboard({
 				Profile
 			</Button>
 			<Button
-				component={Link}
+				component="a"
 				href="/logout?redirectUrl=/"
 				variant="subtle"
 				color="red"

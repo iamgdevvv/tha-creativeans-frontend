@@ -10,7 +10,7 @@ export async function queryAssets<T = Asset>(params?: ParamsAssets) {
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await queriesBackend<T>('/api/assets', {
@@ -25,7 +25,7 @@ export async function uploadAsset(payload: UploadAsset) {
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const formData = new FormData()
@@ -49,7 +49,7 @@ export async function deleteAsset(params: Pick<Asset, 'filename' | 'path'>) {
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await queryBackend(`/api/assets/${params.path}/${params.filename}`, {

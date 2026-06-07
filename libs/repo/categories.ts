@@ -18,7 +18,7 @@ export async function queryCategory(categoryId: Category['id'], params?: ParamsC
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await queryBackend<Category>(`/api/categories/${categoryId}`, {
@@ -37,7 +37,7 @@ export async function createCategory(payload: CreateCategory) {
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await mutateBackend<Category, CreateCategory>('/api/categories', payload, {
@@ -55,7 +55,7 @@ export async function updateCategory(categoryId: Category['id'], payload: Create
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await mutateBackend<Category, CreateCategory>(
@@ -78,7 +78,7 @@ export async function deleteCategory(categoryId: Category['id']) {
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await queryBackend(`/api/categories/${categoryId}`, {

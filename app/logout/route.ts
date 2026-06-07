@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
 	await removeTokenAuth()
 
 	const url = new URL(request.url)
-	const redirectUrl = url.searchParams.get('redirectUrl') || '/login'
+	const redirectUrl = url.searchParams.get('redirectUrl') || '/auth/login'
 
 	return NextResponse.redirect(new URL(redirectUrl, request.url), { status: 307 })
 }

@@ -1,6 +1,7 @@
 import { ColorSchemeScript, mantineHtmlProps } from '@mantine/core'
 import { Plus_Jakarta_Sans } from 'next/font/google'
 
+import Providers from '@components/providers/providers'
 import { generateMeta } from '@libs/utils'
 
 import '@mantine/carousel/styles.css'
@@ -58,7 +59,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 					forceColorScheme="light"
 				/>
 			</head>
-			<body>{children}</body>
+			<body>
+				<Providers>{children}</Providers>
+			</body>
 		</html>
 	)
 }

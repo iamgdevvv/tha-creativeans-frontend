@@ -40,7 +40,7 @@ export async function userMePassword(payload: UpdateUserPassword) {
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await mutateBackend<unknown, UpdateUserPassword>(
@@ -62,7 +62,7 @@ export async function queryUsers<T = User>(params?: ParamsUsers) {
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await queriesBackend<T>('/api/users', {
@@ -81,7 +81,7 @@ export async function queryUser<T = User>(userId: User['id'], params?: ParamsUse
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await queryBackend<T>(`/api/users/${userId}`, {
@@ -100,7 +100,7 @@ export async function createUser(payload: CreateUser) {
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await mutateBackend<User, CreateUser>('/api/users', payload, {
@@ -118,7 +118,7 @@ export async function updateUser(userId: User['id'], payload: UpdateUser) {
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await mutateBackend<User, UpdateUser>(`/api/users/${userId}`, payload, {
@@ -137,7 +137,7 @@ export async function updateUserPassword(userId: User['id'], payload: UpdateUser
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await mutateBackend<unknown, UpdateUserPassword>(
@@ -159,7 +159,7 @@ export async function updateUserProfile(payload: UpdateUserProfile) {
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await mutateBackend<User, UpdateUserProfile>('/api/users/profile', payload, {
@@ -180,7 +180,7 @@ export async function updateUserProfilePassword(
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await mutateBackend<
@@ -201,7 +201,7 @@ export async function deleteUser(userId: User['id']) {
 	const authToken = await retrieveTokenAuth()
 
 	if (!authToken) {
-		redirect('/login')
+		redirect('/auth/login')
 	}
 
 	const result = await queryBackend(`/api/users/${userId}`, {

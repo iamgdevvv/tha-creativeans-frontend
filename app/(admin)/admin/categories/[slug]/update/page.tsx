@@ -11,7 +11,9 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic'
 
-export default async function UpdateCategory({ params }: { params: Promise<{ slug: string }> }) {
+export default async function UpdateCategory({
+	params,
+}: PageProps<'/admin/categories/[slug]/update'>) {
 	const { slug } = await params
 	const resultCategory = await queryCategory(slug)
 

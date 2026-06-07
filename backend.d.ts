@@ -22,16 +22,34 @@ type Asset = {
 }
 
 type Product = {
+	id: string
 	name: string
 	userId: string
 	description: string
-	id: string
 	createdAt: Date
 	updatedAt: Date
 	slug: string
 	price: number
 	rating: number
 	inStock: boolean
+}
+
+type Product = {
+	id: string
+	name: string
+	userId: string
+	description: string
+	createdAt: Date
+	updatedAt: Date
+	slug: string
+	price: number
+	rating: number
+	inStock: boolean
+}
+
+type ProductPublic = Omit<Product, 'id' | 'userId'> & {
+	thumbnails: string[]
+	categories: Category[]
 }
 
 type DetailProduct = Product & {

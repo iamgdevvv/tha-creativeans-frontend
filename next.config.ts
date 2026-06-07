@@ -9,11 +9,11 @@ const nextConfig: NextConfig = {
 			'next/dist/build/polyfills/polyfill-module': './libs/modern-polyfill.js',
 		},
 	},
-	logging: {
-		fetches: {
-			fullUrl: true,
-		},
-	},
+	// logging: {
+	// 	fetches: {
+	// 		fullUrl: true,
+	// 	},
+	// },
 	images: {
 		formats: ['image/avif'],
 		dangerouslyAllowLocalIP: true,

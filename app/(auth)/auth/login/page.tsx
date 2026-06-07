@@ -56,7 +56,7 @@ export default async function Login({ searchParams }: PageProps) {
 				<Divider my="xl" />
 				<Button
 					component={Link}
-					href={`/login-google?redirectUrl=${redirectUrl}`}
+					href={`/auth/login/google?${redirectUrl ? `redirectUrl=${redirectUrl}` : ''}`}
 					variant="light"
 					fullWidth
 					radius="md"

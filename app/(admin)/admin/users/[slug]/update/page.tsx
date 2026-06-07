@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic'
 
-export default async function UpdateUser({ params }: { params: Promise<{ slug: string }> }) {
+export default async function UpdateUser({ params }: PageProps<'/admin/users/[slug]/update'>) {
 	const { slug } = await params
 	const resultUser = await queryUser<User>(slug)
 

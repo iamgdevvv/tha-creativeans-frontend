@@ -35,7 +35,7 @@ export default function FormLogin({
 			setErrorAuthLogin(null)
 
 			startActionSubmit(async () => {
-				const result = await authLogin(payload)
+				const result = await authLogin(payload, redirectUrl)
 
 				if (result.code === 'error') {
 					setErrorAuthLogin(
@@ -52,9 +52,7 @@ export default function FormLogin({
 					return
 				}
 
-				if (redirectUrl) {
-					redirect(redirectUrl)
-				} else if (['ADMIN', 'STAFF'].includes(result.data.role)) {
+				if (['ADMIN', 'STAFF'].includes(result.data.role)) {
 					redirect('/admin')
 				} else {
 					redirect('/dashboard')

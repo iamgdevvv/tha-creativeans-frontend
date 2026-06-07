@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic'
 
-export default async function DetailCategory({ params }: { params: Promise<{ slug: string }> }) {
+export default async function DetailCategory({ params }: PageProps<'/admin/categories/[slug]'>) {
 	const { slug } = await params
 	const resultCategory = await queryCategory(slug)
 

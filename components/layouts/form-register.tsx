@@ -46,7 +46,7 @@ export default function FormRegister(props: BoxProps) {
 				return
 			}
 
-			redirect('/login')
+			redirect('/auth/login')
 		})
 	}, [])
 

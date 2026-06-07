@@ -1,4 +1,5 @@
 'use server'
+import { redirect } from 'next/navigation'
 
 import type { AuthLogin, AuthRegister } from '@libs/schema/auth'
 import {
@@ -8,7 +9,7 @@ import {
 } from '@libs/server-functions/backend-api'
 import { storeTokenAuth } from '@libs/server-functions/cookies'
 
-export async function authLogin(payload: AuthLogin) {
+export async function authLogin(payload: AuthLogin, redirectUrl?: string) {
 	const result = await mutateBackend<
 		User,
 		AuthLogin,
@@ -24,6 +25,10 @@ export async function authLogin(payload: AuthLogin) {
 	const { token, ...response } = result
 
 	await storeTokenAuth(token)
+
+	if (redirectUrl) {
+		redirect(redirectUrl)
+	}
 
 	return response
 }

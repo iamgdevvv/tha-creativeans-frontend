@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
 	const role = url.searchParams.get('role') as UserRole | null
 
 	if (!token) {
-		return NextResponse.redirect(new URL('/login', request.url), { status: 307 })
+		return NextResponse.redirect(new URL('/auth/login', request.url), { status: 307 })
 	}
 
 	await storeTokenAuth(token)

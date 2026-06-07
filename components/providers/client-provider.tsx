@@ -10,6 +10,11 @@ export default function ClientProvider() {
 
 	useShallowEffect(() => {
 		nprogress.complete()
+
+		scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		})
 	}, [hash, pathname, searchParams])
 
 	useShallowEffect(() => {

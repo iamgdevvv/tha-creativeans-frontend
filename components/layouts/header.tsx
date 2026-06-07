@@ -46,7 +46,7 @@ export default function Header({ data, containerSize, className, ...props }: Hea
 				params.delete('q')
 			}
 
-			router.push(`/?${params.toString()}`)
+			router.push(`/products?${params.toString()}`)
 		},
 		[router, searchParams],
 	)
@@ -197,7 +197,7 @@ export default function Header({ data, containerSize, className, ...props }: Hea
 										</MenuItem>
 									) : null}
 									<MenuItem
-										component={Link}
+										component="a"
 										href="/logout?redirectUrl=/"
 										color="red"
 										leftSection={<LuLogOut size={14} />}
@@ -220,7 +220,7 @@ export default function Header({ data, containerSize, className, ...props }: Hea
 								<Button
 									component={Link}
 									size="xs"
-									href="/login"
+									href="/auth/login"
 								>
 									Sign in
 								</Button>
